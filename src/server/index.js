@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 var cors = require("cors");
 const request = require("request");
+const axios = require("axios");
 
 // Body-parser middleware
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -26,6 +27,19 @@ app.get("/delivery-pickup/checkDeliveryAvailability", (req, res) => {
       res.json(JSON.parse(body));
     }
   );
+});
+
+app.get("/test", (req, response) => {
+  axios
+    .get("https://jsonplaceholder.typicode.com/todos/1")
+    .then((res) => {
+      console.log(`statusCode: ${res.statusCode}`);
+      console.log(res.data);
+      response.json(res.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 });
 
 app.listen(process.env.PORT || 7000, () =>
