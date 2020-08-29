@@ -39,11 +39,9 @@ app.post("/tbGeocodeService", (req, response) => {
   };
   //data object to send
   let jsonData = {
-    sessiontoken: "1234567890",
-    query: "Irvine",
+    sessiontoken: req.body.sessiontoken,
+    query: req.body.query,
   };
-
-  console.log(req.body);
 
   axios
     .post(
@@ -52,11 +50,11 @@ app.post("/tbGeocodeService", (req, response) => {
       config
     )
     .then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       response.json(res.data);
     })
     .catch(function (error) {
-      console.log(err);
+      // console.log(err);
     });
 });
 
