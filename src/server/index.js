@@ -32,20 +32,21 @@ app.get("/json-placeholder", (req, response) => {
     });
 });
 
-app.post("/tbGeocodeService", (req, response) => {
+app.post("/json-placeholder/posts", (req, response) => {
   let config = {
     headers: { "Content-Type": "application/json" },
     timeout: 60000,
   };
   //data object to send
   let jsonData = {
-    sessiontoken: req.body.sessiontoken,
-    query: req.body.query,
+    title: 'foo-title',
+    body: 'bar-body',
+    userId: 93939
   };
 
   axios
     .post(
-      "https://www-rel-q.nonprod.tb-aws.com/tbGeocodeService",
+      "https://jsonplaceholder.typicode.com/posts",
       jsonData,
       config
     )

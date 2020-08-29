@@ -1,4 +1,5 @@
 ## Quick Start
+Use this if you need a Node Server Proxy for CORS issue.  Helpful if your back-end is hosted seprately from your front-end.
 
 # Install dependencies
 
@@ -8,14 +9,4 @@ yarn (or npm install)
 
 yarn dev (or npm run server)
 
-# Start development client
 
-yarn dev (or npm run client)
-
-# Build for production
-
-yarn build (or npm run build)
-
-# Start production server
-
-yarn start (or npm start)
