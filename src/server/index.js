@@ -18,10 +18,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/delivery-pickup/checkDeliveryAvailability", (req, response) => {
+app.get("/json-placeholder", (req, response) => {
   axios
     .get(
-      `https://www.tacobell.com/delivery-pickup/checkDeliveryAvailability?latitude=${req.query.latitude}&longitude=${req.query.longitude}`
+     "https://jsonplaceholder.typicode.com/todos/1"
     )
     .then((res) => {
       console.log(res.data);
