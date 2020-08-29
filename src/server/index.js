@@ -11,8 +11,10 @@ const axios = require("axios");
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
+app.use(cors());
+
 app.use((req, res, next) => {
-  res.header("*");
+  res.header("Access-Control-Allow-Origin", "*");
   next();
 });
 
@@ -30,7 +32,7 @@ app.get("/delivery-pickup/checkDeliveryAvailability", (req, response) => {
     });
 });
 
-app.get("/tbGeocodeService", (req, response) => {
+app.post("/tbGeocodeService", (req, response) => {
   let config = {
     headers: { "Content-Type": "application/json" },
     timeout: 60000,
