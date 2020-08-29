@@ -14,26 +14,25 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/delivery-pickup/checkDeliveryAvailability", (req, res) => {
-  request(
-    {
-      url: `https://www.tacobell.com/delivery-pickup/checkDeliveryAvailability?latitude=${req.query.latitude}&longitude=${req.query.longitude}`,
-    },
-    (error, response, body) => {
-      if (error || response.statusCode !== 200) {
-        return res.status(500).json({ type: "error", message: err.message });
-      }
-
-      res.json(JSON.parse(body));
-    }
-  );
+app.get("/delivery-pickup/checkDeliveryAvailability", (req, response) => {
+  axios
+    .get(
+      `https://www.tacobell.com/delivery-pickup/checkDeliveryAvailability?latitude=${req.query.latitude}&longitude=${req.query.longitude}`
+    )
+    .then((res) => {
+      console.log(res.data);
+      response.json(res.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 });
 
 app.get("/test", (req, response) => {
+  console.log(req.query);
   axios
     .get("https://jsonplaceholder.typicode.com/todos/1")
     .then((res) => {
-      console.log(`statusCode: ${res.statusCode}`);
       console.log(res.data);
       response.json(res.data);
     })
