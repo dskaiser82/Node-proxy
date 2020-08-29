@@ -5,12 +5,14 @@ var cors = require("cors");
 const request = require("request");
 const axios = require("axios");
 
+// app.use(cors);
+
 // Body-parser middleware
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("*");
   next();
 });
 
@@ -28,16 +30,31 @@ app.get("/delivery-pickup/checkDeliveryAvailability", (req, response) => {
     });
 });
 
-app.get("/test", (req, response) => {
-  console.log(req.query);
+app.get("/tbGeocodeService", (req, response) => {
+  let config = {
+    headers: { "Content-Type": "application/json" },
+    timeout: 60000,
+  };
+  //data object to send
+  let jsonData = {
+    sessiontoken: "1234567890",
+    query: "Irvine",
+  };
+
+  console.log(req.body);
+
   axios
-    .get("https://jsonplaceholder.typicode.com/todos/1")
+    .post(
+      "https://www-rel-q.nonprod.tb-aws.com/tbGeocodeService",
+      jsonData,
+      config
+    )
     .then((res) => {
       console.log(res.data);
       response.json(res.data);
     })
-    .catch((error) => {
-      console.error(error);
+    .catch(function (error) {
+      console.log(err);
     });
 });
 
